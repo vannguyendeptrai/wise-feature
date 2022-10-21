@@ -18,20 +18,12 @@ export default async function handler(req, res) {
         }
     }
  
-    if (req.body.task === 'add_fake_personal_content') {
+    if (req.body.task === 'add_fake_personal_savings') {
         const users = await prisma.user.findMany()
     
-        const getRandomUser = () => {
-            const randomIndex = Math.floor(Math.random() * users.length)
-            return users[randomIndex]
-        }
-
-        const createSavingForRandomUser = async () => {
-            const user = getRandomUser()
-
+        users.forEach(async (user) => {
             let count = 0
-        
-            while (count < 5) {
+            while (count < 2) {
                 await prisma.personalSaving.create({
                     data: {
                         title: faker.word.noun().toLowerCase(),
@@ -46,25 +38,23 @@ export default async function handler(req, res) {
                 })
                 count++
             }
-        }
-        await createSavingForRandomUser()
+        })
+    }
 
-        const personalSavings = await prisma.personalSaving.findMany()
-
-        personalSavings.forEach(async (saving) => {
+    if (req.body.task === 'add_fake_personal_deposits') {
+        const savings = await prisma.personalSaving.findMany()
+    
+        savings.forEach(async (saving) => {
             let count = 0
-            const depositNumber = Math.floor(Math.random() * 5)
-        
-            while (count < depositNumber) {
-            
+            while (count < 3) {
                 await prisma.personalDeposit.create({
                     data: {
-                        value: faker.datatype.number(20,50),
-                        saving: {
-                            connect: { id: saving.id },
-                        },
+                        value: faker.datatype.number(10,20),
                         owner: {
                             connect: { id: saving.ownerId },
+                        },
+                        saving: {
+                            connect: { id: saving.id },
                         },
                     },
                 })

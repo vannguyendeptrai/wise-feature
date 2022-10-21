@@ -2,8 +2,12 @@ export default function Utils() {
     const tasks = [
       { task: 'generate_users', description: 'Generate random users' },
       {
-        task: 'add_fake_personal_content',
-        description: 'Add fake personal content including savings and deposits',
+        task: 'add_fake_personal_savings',
+        description: 'Add fake personal savings',
+      },
+      {
+        task: 'add_fake_personal_deposits',
+        description: 'Add fake personal deposits',
       },
       {
         task: 'clean_database',
