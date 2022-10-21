@@ -21,6 +21,8 @@ model User {
   updatedAt     DateTime  @updatedAt
   accounts      Account[]
   sessions      Session[]
+  personalSavings       PersonalSaving[]
+  personalDeposits      PersonalDeposit[]
 }
 
 model VerificationToken {
@@ -59,3 +61,30 @@ model Session {
   expires      DateTime
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
+
+// saving plan - Personal
+model PersonalSaving {
+  id            Int        @id @default(autoincrement())
+  title         String
+  content       String
+  image         String?
+  createdAt     DateTime   @default(now())
+  owner         User       @relation(fields: [ownerId], references: [id])
+  ownerId       String
+  savingGoal    Int
+  deadline      DateTime
+  period        Int
+  deposits      PersonalDeposit[]
+  numberOfLostDeposit Int?
+}
+
+model PersonalDeposit {
+  id            Int        @id @default(autoincrement())
+  value         Int
+  owner         User       @relation(fields: [ownerId], references: [id])
+  ownerId       String
+  saving        PersonalSaving @relation(fields: [savingId], references: [id])
+  savingId      Int
+}
+
+// Saving Plan - Team
