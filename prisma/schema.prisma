@@ -1,12 +1,15 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
+
 generator client {
   provider = "prisma-client-js"
 }
+
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
 model User {
   id            String    @id @default(cuid())
   name          String?
@@ -22,12 +25,15 @@ model User {
   personalDeposits      PersonalDeposit[]
   currentPoint  Int?
 }
+
 model VerificationToken {
   identifier String
   token      String   @unique
   expires    DateTime
+
   @@unique([identifier, token])
 }
+
 model Account {
   id                 String  @id @default(cuid())
   userId             String
@@ -43,9 +49,12 @@ model Account {
   session_state      String?
   oauth_token_secret String?
   oauth_token        String?
+
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
   @@unique([provider, providerAccountId])
 }
+
 model Session {
   id           String   @id @default(cuid())
   sessionToken String   @unique
@@ -53,6 +62,7 @@ model Session {
   expires      DateTime
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
+
 model PersonalSaving {
   id            Int        @id @default(autoincrement())
   title         String
@@ -68,7 +78,9 @@ model PersonalSaving {
   deposits      PersonalDeposit[]
   currentPoint  Int?
   currentDeposit Int?
+  currency      String     @default("USD")
 }
+
 model PersonalDeposit {
   id            Int        @id @default(autoincrement())
   value         Int
@@ -82,4 +94,5 @@ model PersonalDeposit {
   stage         String?  //adding Stage
   insufficient       Boolean   @default(false)
 }
+
 // Saving Plan - Team

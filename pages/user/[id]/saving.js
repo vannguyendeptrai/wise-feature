@@ -30,9 +30,7 @@ function Input() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     setSubmitting(true);
-    console.log("submiting:", formData);
-    // console.log("lenght:", Object.keys(formData).length);
-    // console.log("values:", Object.values(formData));
+    // console.log("submiting:", formData);
     if (
       Object.keys(formData).length < 6 &&
       !Object.values(formData).includes("Select")
@@ -55,12 +53,12 @@ function Input() {
       content: formData.description,
       savingGoal: formData.target,
       period: formData.frequency,
-      // unit: formData.currency,
+      currency: formData.currency,
       deadline: new Date(),
       userId: userID,
     };
 
-    console.log("req:", reqBodyObj);
+    // console.log("req:", reqBodyObj);
 
     const res = await fetch("/api/saving", {
       headers: { "Content-Type": "application/json" },
