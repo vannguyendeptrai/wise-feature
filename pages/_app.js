@@ -1,8 +1,8 @@
-import '../styles/globals.css'
+import "../styles/globals.css";
 // import { SessionProvider } from 'next-auth/react' // REQUIRED for UserAuth
 
 function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />
+  return <Component {...pageProps} />;
   // UserAuth with NextAuth
   // return (
   //   <SessionProvider session={pageProps.session}>
@@ -11,4 +11,4 @@ function MyApp({ Component, pageProps }) {
   // )
 }
 
-export default MyApp
+export default MyApp;
