@@ -73,6 +73,7 @@ model PersonalSaving {
   savingGoal    Int
   deadline      DateTime
   period        String
+  calculateUnit Int?
   deposits      PersonalDeposit[]
 }
 
@@ -85,7 +86,8 @@ model PersonalDeposit {
   savingId      Int
   point         Int       @default(5)
   overDue       Boolean   @default(false)
-  depositDate   DateTime?
+  targetDate   DateTime?
+  stage         String?  //adding Stage
 }
 
 // Saving Plan - Team

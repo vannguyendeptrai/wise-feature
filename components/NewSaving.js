@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 import Link from 'next/link'
-import { periods } from 'lib/data'
+import { periods, calculateUnits } from 'lib/data'
 
 
 export default function NewSaving({ user }){
@@ -11,6 +11,7 @@ export default function NewSaving({ user }){
     const [savingGoal, setSavingGoal] = useState('')
     const [deadline, setDeadline] = useState('')
     const [period, setPeriod] = useState(periods[0])
+    const [unit, setUnit] = useState(calculateUnits[0])
     
     return (
         <>            
@@ -25,11 +26,18 @@ export default function NewSaving({ user }){
                             return
                         }
 
+                        switch(period){
+                            case "Daily": setUnit(calculateUnits[0]);
+                            case "Weekly": setUnit(calculateUnits[1]);
+                            case "Monthly": setUnit(calculateUnits[2]);
+                        }
+
                         const reqBodyObj = {
                             'title': title,
                             'content': content,
                             'savingGoal': savingGoal,
                             'period': period,
+                            'unit': unit,
                             'deadline': deadline,
                             'userId': user.id,
                         }
@@ -77,7 +85,9 @@ export default function NewSaving({ user }){
                     rows={1}
                     cols={50}
                     placeholder='The saving period'
-                    onChange={(e) => setPeriod(e.target.value)}
+                    onChange={(e) => {
+                        setPeriod(e.target.value)
+                    }}
                     />
                     <div className='mt-5'>
                     <button className='border border-gray-700 px-8 py-2 mt-0 mr-8 font-bold '>

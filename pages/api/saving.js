@@ -19,6 +19,7 @@ export default async function handler(req, res) {
             content: req.body.content,
             savingGoal: Number(req.body.savingGoal),
             period: req.body.period,
+            calculateUnit: req.body.unit,
             deadline: req.body.deadline,
             owner: {
               connect: { id: req.body.userId },
@@ -30,6 +31,7 @@ export default async function handler(req, res) {
         })
 
         res.json(saving)
+        console.log("end request",saving)
         return
     }
 }

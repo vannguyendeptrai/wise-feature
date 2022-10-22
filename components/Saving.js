@@ -42,7 +42,7 @@ export default function Saving({ saving }) {
                   Deadline: {saving.deadline}
               </p>
               <p className='flex-shrink text-base font-normal color-primary width-auto mt-2'>
-                  Period: {saving.period}
+                  Frequency: {saving.period} - Unit: {saving.calculateUnit !== 0 ? saving.calculateUnit : "End of Month"}
               </p>
         </div>
       </div>

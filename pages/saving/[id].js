@@ -29,6 +29,7 @@ export default function Saving({saving, deposits}){
                 <p className='ml-4 text-left grow'>{saving.savingGoal}</p>
                 <p className='ml-4 text-left grow'>{saving.deadline}</p>
                 <p className='ml-4 text-left grow'>{saving.period}</p>
+                <p className='ml-4 text-left grow'>{saving.unit}</p>
             </div>
             <div className='border border-3 border-black p-10  mx-20 my-10'>
                 <button

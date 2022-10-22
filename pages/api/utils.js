@@ -1,6 +1,6 @@
 import prisma from "lib/prisma"
 import { faker } from '@faker-js/faker'
-import { periods } from "lib/data"
+import { periods, calculateUnits, depositStages } from "lib/data"
 
 export default async function handler(req, res) {
     if (req.method !== 'POST') return res.end()
@@ -21,21 +21,24 @@ export default async function handler(req, res) {
  
     if (req.body.task === 'add_fake_personal_savings') {
         const users = await prisma.user.findMany()
-    
+  
         users.forEach(async (user) => {
             let count = 0
+            var index = Math.random.numer(0,2);
+            var data = {
+                title: faker.word.noun().toLowerCase(),
+                content: faker.lorem.paragraph(1).toLowerCase(),
+                savingGoal: faker.datatype.number(100,200),
+                period: periods[index],
+                unit: calculateUnits[index],
+                deadline: faker.date.future(),
+                owner: {
+                    connect: { id: user.id },
+                },
+            }
             while (count < 2) {
                 await prisma.personalSaving.create({
-                    data: {
-                        title: faker.word.noun().toLowerCase(),
-                        content: faker.lorem.paragraph(1).toLowerCase(),
-                        savingGoal: faker.datatype.number(100,200),
-                        period: periods[Math.random.number(0,2)],
-                        deadline: faker.date.future(),
-                        owner: {
-                            connect: { id: user.id },
-                        },
-                    },
+                    data: data,
                 })
                 count++
             }
@@ -57,6 +60,7 @@ export default async function handler(req, res) {
                         saving: {
                             connect: { id: saving.id },
                         },
+                        stage: depositStages[0]
                     },
                 })
                 count++
