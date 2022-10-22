@@ -1,4 +1,5 @@
 import Link from "next/link";
+import prisma from "lib/prisma";
 import moment from "moment";
 import {
   Progress,
@@ -9,7 +10,14 @@ import {
   Typography,
 } from "@material-tailwind/react";
 
-export default function Saving({ saving }) {
+export default function Saving({ saving, deposits }) {
+  let sumDeposit = 0
+  if(deposits) {
+    deposits.forEach((deposit) => {
+      sumDeposit += deposit.value
+    })
+  }
+
   return (
     <>
       <div className="flex flex-col mb-4 mx-20 my-10 items-center">
@@ -51,13 +59,13 @@ export default function Saving({ saving }) {
             </Typography>
             <div className="flex justify-between">
               <span style={{ color: "#37517E" }} variant="small">
-                $199 / ${saving.savingGoal}
+                ${sumDeposit} / ${saving.savingGoal}
               </span>
               <span style={{ color: "#37517E" }} variant="small">
-                30%
+                { Math.round(sumDeposit * 100 / saving.savingGoal) }%
               </span>
             </div>
-            <Progress color={"#008EC0"} value={67} />
+            <Progress color={"#008EC0"} value={sumDeposit * 100 / saving.savingGoal} />
           </CardBody>
           <CardFooter divider className="flex items-center justify-end py-3">
             <Typography variant="small">
@@ -68,4 +76,17 @@ export default function Saving({ saving }) {
       </div>
     </>
   );
+}
+
+export async function getServerSideProps({saving}){
+
+  console.log(saving.id)
+  // let deposits = await getDepositsOnSaving(saving.id, prisma)
+  // deposits = JSON.parse(JSON.stringify(deposits))
+  // console.log(deposits)
+  return {
+    props: {
+      // deposits
+    },
+  };
 }
