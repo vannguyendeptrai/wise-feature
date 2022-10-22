@@ -10,7 +10,7 @@ function Input() {
       >
         <div
           className="relative flex-col justify-around bg-[#37517E] w-full h-60
-         rounded-b-[3rem] text-center pt-16"
+         rounded-b-3xl text-center pt-16"
         >
           <h1 className="text-white text-xl">Set a Goal</h1>
         </div>

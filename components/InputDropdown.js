@@ -1,4 +1,8 @@
+import { periods } from "lib/data";
 export default function InputDropdown() {
+  const frequency = periods.map((each) => {
+    return <option key={each}>{each}</option>;
+  });
   return (
     <div>
       <label
@@ -14,13 +18,9 @@ export default function InputDropdown() {
         <select
           id="frequency"
           name="frequency"
-          className="block w-full rounded-md border-gray-300  p-3 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+          className="block w-full rounded-md  p-3 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
         >
-          <option>Quarterly</option>
-          <option>Monthly</option>
-          <option>Bi-Weekly</option>
-          <option>Weekly</option>
-          <option>Daily</option>
+          {frequency}
         </select>
       </div>
     </div>
