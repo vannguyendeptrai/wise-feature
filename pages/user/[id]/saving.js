@@ -1,7 +1,75 @@
+import React, { useReducer, useState } from "react";
 import Form from "components/Form";
-import { Button } from "@material-tailwind/react";
+import { calculateUnits } from "lib/data";
+import { useRouter } from "next/router";
+
+const formReducer = (state, event) => {
+  // console.log("state:", state);
+  // console.log("event name & value:", [event.name], event.value);
+  return {
+    ...state,
+    [event.name]: event.value,
+  };
+};
 
 function Input() {
+  const [formData, setFormData] = useReducer(formReducer, {});
+  const [submitting, setSubmitting] = useState(false);
+  const router = useRouter();
+  const userID = router.query.id;
+
+  const handleChange = (event) => {
+    // console.log("name:", event.target.name);
+    // console.log("value:", event.target.value);
+    setFormData({
+      name: event.target.name,
+      value: event.target.value,
+    });
+    // console.log("formData:", formData);
+  };
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    setSubmitting(true);
+    console.log("submiting:", formData);
+    // console.log("lenght:", Object.keys(formData).length);
+    // console.log("values:", Object.values(formData));
+    if (
+      Object.keys(formData).length < 6 &&
+      !Object.values(formData).includes("Select")
+    ) {
+      alert("Please fill all the fields");
+      return;
+    }
+    var unit = calculateUnits[0];
+    switch (formData.frequency) {
+      case "Daily":
+        unit = calculateUnits[0];
+      case "Weekly":
+        unit = calculateUnits[1];
+      case "Monthly":
+        unit = calculateUnits[2];
+    }
+
+    const reqBodyObj = {
+      title: formData.title,
+      content: formData.description,
+      savingGoal: formData.target,
+      period: formData.frequency,
+      // unit: formData.currency,
+      deadline: new Date(),
+      userId: userID,
+    };
+
+    console.log("req:", reqBodyObj);
+
+    const res = await fetch("/api/saving", {
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(reqBodyObj),
+      method: "POST",
+    });
+
+    router.push(`/user/${userID}`);
+  };
   return (
     <div className="w-full bg-[#f2f5f7] h-28">
       <div
@@ -9,22 +77,15 @@ function Input() {
         "
       >
         <div
-          className="relative flex-col justify-around bg-[#37517E] w-full h-60
+          className="flex-col justify-around bg-[#37517E] w-full h-60
          rounded-b-3xl text-center pt-16"
         >
           <h1 className="text-white text-xl">Set a Goal</h1>
         </div>
 
-        <div className="pb-20 pt-14 absolute top-20 drop-shadow-lg">
-          <Form />
-          <Button
-            className="rounded-[2.5rem] w-96 h-16 text-[#00B9FF] border-[#00B9FF] mt-20"
-            variant="outlined"
-          >
-            Create New Goal
-          </Button>
+        <div className="absolute top-40 pb-10">
+          <Form onSubmit={handleSubmit} onChange={handleChange} />
         </div>
-        <div className="absolute "></div>
       </div>
     </div>
   );

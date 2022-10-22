@@ -1,4 +1,4 @@
-export default function InputText() {
+export default function InputText({ onChange }) {
   return (
     <div>
       <label htmlFor="name" className="block text-sm font-light text-[#5D7079]">
@@ -9,9 +9,10 @@ export default function InputText() {
           <span className="text-gray-500 sm:text-sm">Icon</span>
         </div>
         <input
+          onChange={onChange}
           type="text"
-          name="name"
-          id="name"
+          name="title"
+          id="title"
           className="block w-full rounded-md border-gray-300 pl-14 p-3 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
           placeholder="Travel"
         />
