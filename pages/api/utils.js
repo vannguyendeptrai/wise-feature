@@ -21,16 +21,22 @@ export default async function handler(req, res) {
  
     if (req.body.task === 'add_fake_personal_savings') {
         const users = await prisma.user.findMany()
+
+        const getRandomInt = (min, max) => {
+            min = Math.ceil(min);
+            max = Math.floor(max);
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
   
         users.forEach(async (user) => {
             let count = 0
-            var index = Math.random.numer(0,2);
+            var index = getRandomInt(0,2);
             var data = {
                 title: faker.word.noun().toLowerCase(),
                 content: faker.lorem.paragraph(1).toLowerCase(),
                 savingGoal: faker.datatype.number(100,200),
                 period: periods[index],
-                unit: calculateUnits[index],
+                calculateUnit: calculateUnits[index],
                 deadline: faker.date.future(),
                 owner: {
                     connect: { id: user.id },
