@@ -6,7 +6,9 @@ export default function Deposits({ deposits }) {
   return (
     <>
       {deposits.map((deposit, index) => (
-        <Deposit key={index} deposit={deposit} />
+        <li class="mb-10 ml-6">
+          <Deposit key={index} deposit={deposit} />
+        </li>
       ))}
     </>
   )
