@@ -23,6 +23,7 @@ model User {
   sessions      Session[]
   personalSavings       PersonalSaving[]
   personalDeposits      PersonalDeposit[]
+  currentPoint  Int?
 }
 
 model VerificationToken {
@@ -75,6 +76,8 @@ model PersonalSaving {
   period        String
   calculateUnit Int?
   deposits      PersonalDeposit[]
+  currentPoint  Int?
+  currentDeposit Int?
 }
 
 model PersonalDeposit {
@@ -88,6 +91,7 @@ model PersonalDeposit {
   overDue       Boolean   @default(false)
   targetDate    DateTime?
   stage         String?  //adding Stage
+  insufficient       Boolean   @default(false)
 }
 
 // Saving Plan - Team
