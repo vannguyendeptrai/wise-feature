@@ -5,6 +5,7 @@ import { Button } from "@material-tailwind/react";
 
 
 import Savings from 'components/Savings'
+import NewSaving from 'components/NewSaving'
 
 export default function Profile({user, savings}){
     if (!user) return <p className='text-center p-5'>User does not exist 😞</p>
@@ -22,13 +23,7 @@ export default function Profile({user, savings}){
             <Savings savings={savings} />
             <Button variant="outlined">outlined</Button>
             <div className='border border-3 border-black p-10  mx-20 my-10'>
-                Await for create new sving coponent to be created
-                {/* <Link href={`/saving/submit${user.id}`}>
-                    <button
-                        className='border-gray-800 border-2 p-4 w-full'
-                        >Create New Saving
-                    </button>
-                </Link> */}
+                <NewSaving user={user}/>
             </div>
         </>
     )

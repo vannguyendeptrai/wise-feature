@@ -25,7 +25,6 @@ export default function Home({users}) {
 export async function getServerSideProps(){
   let users = await getUsers(prisma)
   users = JSON.parse(JSON.stringify(users))
-  console.log(users);
   return {
       props: {
           users,
