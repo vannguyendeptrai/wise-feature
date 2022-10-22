@@ -19,8 +19,8 @@ export default function Saving({saving, deposits}){
                     <a className='underline'>Home</a>
                 </Link>
                 <p className='grow'></p>
-                </header>
-                <header className='bg-black text-white h-12 flex pt-3 px-5 pb-2'>
+            </header>
+            <header className='bg-black text-white h-12 flex pt-3 px-5 pb-2'>
                 <p className='text-center'>/saving/{saving.id}</p>
             </header>
             <div className='border border-3 border-black p-10  mx-20 my-10'>
