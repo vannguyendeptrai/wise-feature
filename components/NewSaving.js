@@ -10,7 +10,7 @@ export default function NewSaving({ user }){
     const [content, setContent] = useState('')
     const [savingGoal, setSavingGoal] = useState('')
     const [deadline, setDeadline] = useState('')
-    const [period, setPeriod] = useState(period[0])
+    const [period, setPeriod] = useState(periods[0])
     
     return (
         <>            
