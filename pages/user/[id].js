@@ -1,6 +1,8 @@
 import Link from 'next/link'
 import prisma from 'lib/prisma'
 import { getUser, getSavingsFromUser } from 'lib/data.js'
+import { Button } from "@material-tailwind/react";
+
 
 import Savings from 'components/Savings'
 import NewSaving from 'components/NewSaving'
@@ -19,6 +21,7 @@ export default function Profile({user, savings}){
                 <p className='text-center'>/user/{user.id}</p>
             </header>
             <Savings savings={savings} />
+            <Button variant="outlined">outlined</Button>
             <div className='border border-3 border-black p-10  mx-20 my-10'>
                 <NewSaving user={user}/>
             </div>
