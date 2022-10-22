@@ -62,7 +62,6 @@ model Session {
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
-// saving plan - Personal
 model PersonalSaving {
   id            Int        @id @default(autoincrement())
   title         String

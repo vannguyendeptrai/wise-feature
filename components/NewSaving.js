@@ -1,11 +1,7 @@
-// Make this as a new component and use under user page.
-
 import { useRouter } from 'next/router'
 import { useState } from 'react'
-import prisma from 'lib/prisma'
 import Link from 'next/link'
 
-import { getUser } from 'lib/data'
 
 export default function NewSaving({ user }){
     const router = useRouter()
@@ -16,13 +12,7 @@ export default function NewSaving({ user }){
     const [period, setPeriod] = useState('')
     
     return (
-        <>
-            <header className='bg-black text-white h-12 flex pt-3 px-5 pb-2'>
-                <Link href={`/`}>
-                <a className='underline'>Home</a>
-                </Link>
-                <p className='grow'></p>
-            </header>
+        <>            
             <div className='flex flex-row mb-4  px-10 justify-center'>
             <div className='flex flex-col mb-4 border border-3 border-black p-10 bg-gray-200 my-10'>
                 <form
@@ -33,15 +23,26 @@ export default function NewSaving({ user }){
                             alert('Enter a title')
                             return
                         }
-                        const body = new FormData()
-                        body.append('title', title)
-                        body.append('content', content)
-                        body.append('savingGoal', savingGoal)
-                        body.append('deadline', deadline)
-                        body.append('period', period)
+                        // const body = new FormData()
+                        // body.append('title', title)
+                        // body.append('content', content)
+                        // body.append('savingGoal', savingGoal)
+                        // body.append('deadline', deadline)
+                        // body.append('period', period)
+                        // body.append('userId',user.id)
 
-                        const res = await fetch('/api/post', {
-                            body,
+                        const reqBodyObj = {
+                            'title': title,
+                            'content': content,
+                            'savingGoal': savingGoal,
+                            'period': period,
+                            'deadline': deadline,
+                            'userId': user.id,
+                        }
+
+                        const res = await fetch('/api/saving', {
+                            headers : {'Content-Type' : 'application/json'},
+                            body: JSON.stringify(reqBodyObj),
                             method: 'POST',
                         })
 
@@ -94,14 +95,4 @@ export default function NewSaving({ user }){
             </div>
         </>
     )
-}
-
-export async function getServerSideProps({ params }) {
-    const user = await getUser(params.id, prisma)
-  
-    return {
-      props: {
-        user,
-      },
-    }
 }
