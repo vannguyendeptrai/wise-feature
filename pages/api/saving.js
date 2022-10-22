@@ -37,10 +37,6 @@ export default async function handler(req, res) {
         let depositPerValue = saving.savingGoal / numberOfDeposits
         let nextTargetDate = await dateIncrementor(saving.createdAt, saving.period)
         
-        console.log(numberOfDeposits)
-        console.log(depositPerValue)
-        console.log(new Date(nextTargetDate))
-
         let count = 0
         while(count < numberOfDeposits){
 

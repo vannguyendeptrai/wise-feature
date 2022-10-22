@@ -78,6 +78,7 @@ model PersonalSaving {
   deposits      PersonalDeposit[]
   currentPoint  Int?
   currentDeposit Int?
+  currency      String     @default("USD")
 }
 
 model PersonalDeposit {

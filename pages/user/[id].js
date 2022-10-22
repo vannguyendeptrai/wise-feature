@@ -57,16 +57,24 @@ export default function Profile({ user, savings }) {
 }
 
 export async function getServerSideProps({ params }) {
-  let user = await getUser(params.id, prisma);
-  user = JSON.parse(JSON.stringify(user));
+    await fetch('/api/user', {
+        headers: {
+            'userId': params.id,
+            'task': 'calculate_saving_of_user',
+        },
+        method: 'GET'
+    })
+    let user = await getUser(params.id, prisma);
+    user = JSON.parse(JSON.stringify(user));
 
-  let savings = await getSavingsFromUser(params.id, prisma);
-  savings = JSON.parse(JSON.stringify(savings));
+    let savings = await getSavingsFromUser(params.id, prisma);
+    savings = JSON.parse(JSON.stringify(savings));
 
-  return {
-    props: {
-      user,
-      savings,
-    },
-  };
+    return {
+        props: {
+            user,
+            savings,
+            deposits,
+        },
+    };
 }
