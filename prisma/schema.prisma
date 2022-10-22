@@ -1,18 +1,15 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
-
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
-
 model User {
   id            String    @id @default(cuid())
-  name          String?
+  name          String?   @unique
   email         String?   @unique
   username      String?   @unique
   emailVerified DateTime?
@@ -21,18 +18,16 @@ model User {
   updatedAt     DateTime  @updatedAt
   accounts      Account[]
   sessions      Session[]
-  personalSavings       PersonalSaving[]
-  personalDeposits      PersonalDeposit[]
+  posts         Post[]
+  comments      Comment[]
+  Vote          Vote[]
 }
-
 model VerificationToken {
   identifier String
   token      String   @unique
   expires    DateTime
-
   @@unique([identifier, token])
 }
-
 model Account {
   id                 String  @id @default(cuid())
   userId             String
@@ -48,12 +43,9 @@ model Account {
   session_state      String?
   oauth_token_secret String?
   oauth_token        String?
-
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-
   @@unique([provider, providerAccountId])
 }
-
 model Session {
   id           String   @id @default(cuid())
   sessionToken String   @unique
@@ -61,30 +53,42 @@ model Session {
   expires      DateTime
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
-
-// saving plan - Personal
-model PersonalSaving {
+model Subreddit {
+  name        String @id
+  description String
+  posts       Post[]
+}
+model Post {
   id            Int        @id @default(autoincrement())
   title         String
   content       String
   image         String?
   createdAt     DateTime   @default(now())
-  owner         User       @relation(fields: [ownerId], references: [id])
-  ownerId       String
-  savingGoal    Int
-  deadline      DateTime
-  period        Int
-  deposits      PersonalDeposit[]
-  numberOfLostDeposit Int?
+  author        User       @relation(fields: [authorId], references: [id])
+  authorId      String
+  comments      Comment[]
+  subreddit     Subreddit? @relation(fields: [subredditName], references: [name])
+  subredditName String?
+  Vote          Vote[]
 }
-
-model PersonalDeposit {
-  id            Int        @id @default(autoincrement())
-  value         Int
-  owner         User       @relation(fields: [ownerId], references: [id])
-  ownerId       String
-  saving        PersonalSaving @relation(fields: [savingId], references: [id])
-  savingId      Int
+model Comment {
+  id        Int      @id @default(autoincrement())
+  content   String
+  createdAt DateTime @default(now())
+  author    User     @relation(fields: [authorId], references: [id])
+  authorId  String
+  post      Post?    @relation(fields: [postId], references: [id])
+  postId    Int?
+  parentId  Int?
+  parent    Comment?  @relation("ParentComment", fields: [parentId], references: [id])
+  Comment   Comment[] @relation("ParentComment")
 }
-
-// Saving Plan - Team
+model Vote {
+  id       Int    @id @default(autoincrement())
+  up       Boolean
+  author   User   @relation(fields: [authorId], references: [id])
+  authorId String
+  post     Post?  @relation(fields: [postId], references: [id])
+  postId   Int?
+  @@unique([authorId, postId])
+}
