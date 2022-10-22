@@ -7,7 +7,7 @@ export default async function handler(req, res) {
     if (req.body.task === 'generate_users') {
         let count = 0
 
-        while (count < 5) {
+        while (count < 3) {
             await prisma.user.create({
                 data: {
                     name: faker.internet.userName().toLowerCase(),
@@ -46,7 +46,7 @@ export default async function handler(req, res) {
     
         savings.forEach(async (saving) => {
             let count = 0
-            while (count < 3) {
+            while (count < 2) {
                 await prisma.personalDeposit.create({
                     data: {
                         value: faker.datatype.number(10,20),
