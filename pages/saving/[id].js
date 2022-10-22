@@ -15,14 +15,9 @@ import {
 import { useRouter } from 'next/router'
 
 export default function Saving({ saving, deposits }) {
-    const router = useRouter()
+    console.log("here", saving);
 
-    let sumDeposit = 0
-    if (deposits) {
-        deposits.forEach((deposit) => {
-            sumDeposit += deposit.value
-        })
-    }
+    const router = useRouter()
 
     if (!saving) {
         return <p className='text-center p-5'>Saving does not exist 😞</p>
@@ -68,13 +63,13 @@ export default function Saving({ saving, deposits }) {
                                     <Typography>{saving.content}</Typography>
                                     <div className="flex justify-between">
                                         <span style={{ color: "#37517E" }} variant="small">
-                                            ${sumDeposit} / ${saving.savingGoal}
+                                            ${saving.currentDeposit} / ${saving.savingGoal}
                                         </span>
                                         <span style={{ color: "#37517E" }} variant="small">
-                                            {Math.round(sumDeposit * 100 / saving.savingGoal)}%
+                                            {Math.round(saving.currentDeposit * 100 / saving.savingGoal)}%
                                         </span>
                                     </div>
-                                    <Progress color={"#008EC0"} value={sumDeposit * 100 / saving.savingGoal} />
+                                    <Progress color={"#008EC0"} value={saving.currentDeposit * 100 / saving.savingGoal} />
                                 </CardBody>
                                 <CardFooter divider className="flex items-center justify-between py-3">
                                     <Typography variant="small">Deposit Frequency: {saving.period}</Typography>
