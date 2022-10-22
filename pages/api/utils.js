@@ -30,7 +30,7 @@ export default async function handler(req, res) {
                         title: faker.word.noun().toLowerCase(),
                         content: faker.lorem.paragraph(1).toLowerCase(),
                         savingGoal: faker.datatype.number(100,200),
-                        period: periods[faker.datatype.number(0,2)],
+                        period: periods[Math.random.number(0,2)],
                         deadline: faker.date.future(),
                         owner: {
                             connect: { id: user.id },
