@@ -40,7 +40,7 @@ export default function Utils() {
       <div className='mt-10 ml-20'>
         <h2 className='mb-10 text-xl'>Utils</h2>
               
-              {tasks.map((task, index) => (
+          {tasks.map((task, index) => (
           <Button key={index} task={task} />
         ))}
       </div>

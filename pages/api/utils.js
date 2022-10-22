@@ -1,5 +1,6 @@
 import prisma from "lib/prisma"
 import { faker } from '@faker-js/faker'
+import { periods } from "lib/data"
 
 export default async function handler(req, res) {
     if (req.method !== 'POST') return res.end()
@@ -29,7 +30,7 @@ export default async function handler(req, res) {
                         title: faker.word.noun().toLowerCase(),
                         content: faker.lorem.paragraph(1).toLowerCase(),
                         savingGoal: faker.datatype.number(100,200),
-                        period: faker.datatype.number(1,30),
+                        period: periods[faker.datatype.number(0,2)],
                         deadline: faker.date.future(),
                         owner: {
                             connect: { id: user.id },

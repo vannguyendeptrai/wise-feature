@@ -72,9 +72,8 @@ model PersonalSaving {
   ownerId       String
   savingGoal    Int
   deadline      DateTime
-  period        Int
+  period        String
   deposits      PersonalDeposit[]
-  numberOfLostDeposit Int?
 }
 
 model PersonalDeposit {
@@ -84,6 +83,9 @@ model PersonalDeposit {
   ownerId       String
   saving        PersonalSaving @relation(fields: [savingId], references: [id])
   savingId      Int
+  point         Int       @default(5)
+  overDue       Boolean   @default(false)
+  depositDate   DateTime?
 }
 
 // Saving Plan - Team

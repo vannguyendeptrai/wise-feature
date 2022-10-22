@@ -5,8 +5,6 @@ export default async function handler(req, res) {
         return res.status(501).end()
     }
 
-    console.log(req.body)
-
     const user = await prisma.user.findUnique({
         where: {
             id: req.body.userId
@@ -20,7 +18,7 @@ export default async function handler(req, res) {
             title: req.body.title,
             content: req.body.content,
             savingGoal: Number(req.body.savingGoal),
-            period: Number(req.body.period),
+            period: req.body.period,
             deadline: req.body.deadline,
             owner: {
               connect: { id: req.body.userId },

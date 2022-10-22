@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 import Link from 'next/link'
+import { periods } from 'lib/data'
 
 
 export default function NewSaving({ user }){
@@ -9,7 +10,7 @@ export default function NewSaving({ user }){
     const [content, setContent] = useState('')
     const [savingGoal, setSavingGoal] = useState('')
     const [deadline, setDeadline] = useState('')
-    const [period, setPeriod] = useState('')
+    const [period, setPeriod] = useState(period[0])
     
     return (
         <>            
@@ -23,13 +24,6 @@ export default function NewSaving({ user }){
                             alert('Enter a title')
                             return
                         }
-                        // const body = new FormData()
-                        // body.append('title', title)
-                        // body.append('content', content)
-                        // body.append('savingGoal', savingGoal)
-                        // body.append('deadline', deadline)
-                        // body.append('period', period)
-                        // body.append('userId',user.id)
 
                         const reqBodyObj = {
                             'title': title,
