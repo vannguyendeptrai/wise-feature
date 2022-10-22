@@ -86,7 +86,7 @@ model PersonalDeposit {
   savingId      Int
   point         Int       @default(5)
   overDue       Boolean   @default(false)
-  targetDate   DateTime?
+  targetDate    DateTime?
   stage         String?  //adding Stage
 }
 

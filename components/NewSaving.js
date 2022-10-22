@@ -11,7 +11,6 @@ export default function NewSaving({ user }){
     const [savingGoal, setSavingGoal] = useState('')
     const [deadline, setDeadline] = useState('')
     const [period, setPeriod] = useState(periods[0])
-    const [unit, setUnit] = useState(calculateUnits[0])
     
     return (
         <>            
@@ -25,11 +24,11 @@ export default function NewSaving({ user }){
                             alert('Enter a title')
                             return
                         }
-
+                        var unit = calculateUnits[0]
                         switch(period){
-                            case "Daily": setUnit(calculateUnits[0]);
-                            case "Weekly": setUnit(calculateUnits[1]);
-                            case "Monthly": setUnit(calculateUnits[2]);
+                            case "Daily": unit = calculateUnits[0];
+                            case "Weekly": unit = calculateUnits[1];
+                            case "Monthly": unit = calculateUnits[2];
                         }
 
                         const reqBodyObj = {

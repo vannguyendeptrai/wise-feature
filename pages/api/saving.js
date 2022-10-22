@@ -1,4 +1,5 @@
 import prisma from 'lib/prisma'
+import { dateCalculator, dateIncrementor, depositStages } from 'lib/data'
 
 export default async function handler(req, res) {
     if (req.method !== 'POST') {
@@ -31,7 +32,35 @@ export default async function handler(req, res) {
         })
 
         res.json(saving)
-        console.log("end request",saving)
+
+        let numberOfDeposits = await dateCalculator(saving.createdAt, saving.deadline, saving.period)
+        let depositPerValue = saving.savingGoal / numberOfDeposits
+        let nextTargetDate = await dateIncrementor(saving.createdAt, saving.period)
+        
+        console.log(numberOfDeposits)
+        console.log(depositPerValue)
+        console.log(new Date(nextTargetDate))
+
+        let count = 0
+        while(count < numberOfDeposits){
+
+            await prisma.personalDeposit.create({
+                data: {
+                    value: depositPerValue,
+                    owner:{
+                        connect: {id: saving.ownerId}
+                    },
+                    saving:{
+                        connect: {id: saving.id}
+                    },
+                    stage: depositStages[0],
+                    targetDate: new Date(nextTargetDate)
+                }
+            })
+            nextTargetDate = await dateIncrementor(nextTargetDate, saving.period, saving.unit)
+            count++
+        }
+
         return
     }
 }
