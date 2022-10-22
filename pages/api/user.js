@@ -8,7 +8,7 @@ export default async function handler(req, res){
     
     if (!user) return res.status(401).json({ message: 'User not found' })
 
-    if(req.body.task === "calculate_saving_of_user"){
+    if(req.header.task === "calculate_saving_of_user"){
         const savings = await getSavingsFromUser(user.id);
     
         for(var i = 0; i < savings.length; i++){

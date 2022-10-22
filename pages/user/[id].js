@@ -1,12 +1,13 @@
 import Link from "next/link";
 import prisma from "lib/prisma";
-import { getUser, getSavingsFromUser } from "lib/data.js";
+import { getUser, calculateSavingsOfUser } from "lib/data.js";
 import { Button } from "@material-tailwind/react";
 
 import Savings from "components/Savings";
 import NewSaving from "components/NewSaving";
 
 export default function Profile({ user, savings }) {
+    console.log("here",savings)
   if (!user) return <p className="text-center p-5">User does not exist 😞</p>;
   return (
     <>
@@ -57,24 +58,16 @@ export default function Profile({ user, savings }) {
 }
 
 export async function getServerSideProps({ params }) {
-    await fetch('/api/user', {
-        headers: {
-            'userId': params.id,
-            'task': 'calculate_saving_of_user',
-        },
-        method: 'GET'
-    })
     let user = await getUser(params.id, prisma);
     user = JSON.parse(JSON.stringify(user));
 
-    let savings = await getSavingsFromUser(params.id, prisma);
+    let savings = await calculateSavingsOfUser(params.id, prisma);
     savings = JSON.parse(JSON.stringify(savings));
 
     return {
         props: {
             user,
             savings,
-            deposits,
         },
     };
 }
