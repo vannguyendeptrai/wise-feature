@@ -1,5 +1,5 @@
 import { periods } from "lib/data";
-export default function InputDropdown() {
+export default function InputDropdown({ onChange }) {
   const frequency = periods.map((each) => {
     return <option key={each}>{each}</option>;
   });
@@ -16,10 +16,15 @@ export default function InputDropdown() {
           Frequency
         </label>
         <select
+          defaultValue="Select"
+          onChange={onChange}
           id="frequency"
           name="frequency"
           className="block w-full rounded-md  p-3 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
         >
+          <option disabled hidden>
+            Select
+          </option>
           {frequency}
         </select>
       </div>
