@@ -31,8 +31,10 @@ export default function Saving({ saving }) {
                 </button>
               </div>
             </div>
+            <Typography>{saving.content}</Typography>
             <Typography>
-              {saving.content}
+              Frequency: {saving.period} - Unit:{" "}
+              {saving.calculateUnit !== 0 ? saving.calculateUnit : "1 Month"}
             </Typography>
             <div className='flex justify-between'>
               <span style={{color: '#37517E'}} variant="small">
