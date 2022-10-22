@@ -45,6 +45,10 @@ export default function Saving({ saving }) {
                 ? saving.calculateUnit
                 : "End of Month"}
             </Typography>
+            <Typography>
+              Frequency: {saving.period} - Unit:{" "}
+              {saving.calculateUnit !== 0 ? saving.calculateUnit : "1 Month"}
+            </Typography>
             <div className="flex justify-between">
               <span style={{ color: "#37517E" }} variant="small">
                 $199 / ${saving.savingGoal}
