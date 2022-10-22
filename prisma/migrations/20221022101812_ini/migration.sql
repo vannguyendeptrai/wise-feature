@@ -58,11 +58,8 @@ CREATE TABLE "PersonalSaving" (
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "ownerId" TEXT NOT NULL,
     "savingGoal" INTEGER NOT NULL,
-    "currentSave" INTEGER NOT NULL,
     "deadline" TIMESTAMP(3) NOT NULL,
-    "period" INTEGER NOT NULL,
-    "timeUnit" TEXT NOT NULL,
-    "numberOfLostDeposit" INTEGER NOT NULL,
+    "period" TEXT NOT NULL,
 
     CONSTRAINT "PersonalSaving_pkey" PRIMARY KEY ("id")
 );
@@ -73,6 +70,9 @@ CREATE TABLE "PersonalDeposit" (
     "value" INTEGER NOT NULL,
     "ownerId" TEXT NOT NULL,
     "savingId" INTEGER NOT NULL,
+    "point" INTEGER NOT NULL DEFAULT 5,
+    "overDue" BOOLEAN NOT NULL DEFAULT false,
+    "depositDate" TIMESTAMP(3),
 
     CONSTRAINT "PersonalDeposit_pkey" PRIMARY KEY ("id")
 );
