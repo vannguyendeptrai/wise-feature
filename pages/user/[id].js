@@ -7,7 +7,6 @@ import Savings from "components/Savings";
 import NewSaving from "components/NewSaving";
 
 export default function Profile({ user, savings }) {
-    console.log("here",savings)
   if (!user) return <p className="text-center p-5">User does not exist 😞</p>;
   return (
     <>
@@ -27,7 +26,7 @@ export default function Profile({ user, savings }) {
       </header>
       <div className="flex flex-col mb-4 mx-20 my-10 items-center">
         <div className="w-1/2">
-          <span>111</span>
+          <span>
           <svg
             width="19"
             height="19"
@@ -39,7 +38,8 @@ export default function Profile({ user, savings }) {
               d="M5.60952 5.03491L0 10.0698H9.53619L10.5314 7.87556H5.7L8.7219 5.03491L6.96667 2.19427H15.1638L7.6 19H10.441L19 0H2.46095L5.60952 5.03491Z"
               fill="#00B9FF"
             />
-          </svg>
+          </svg>{' '}{user.currentPoint}
+          </span>
         </div>
       </div>
       <Savings savings={savings} />
@@ -57,12 +57,13 @@ export default function Profile({ user, savings }) {
   );
 }
 
-export async function getServerSideProps({ params }) {
-    let user = await getUser(params.id, prisma);
-    user = JSON.parse(JSON.stringify(user));
+export async function getServerSideProps({ params }) {   
 
     let savings = await calculateSavingsOfUser(params.id, prisma);
     savings = JSON.parse(JSON.stringify(savings));
+    
+    let user = await getUser(params.id, prisma);
+    user = JSON.parse(JSON.stringify(user));
 
     return {
         props: {
