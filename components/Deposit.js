@@ -29,7 +29,7 @@ export default function Deposit({ deposit }) {
           </span>
         </h3>
         <time className="block mb-2 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">
-          {moment(new Date(deposit.owner.updatedAt)).format(
+          {moment(new Date(deposit.targetDate)).format(
             "ddd, DD MMM, yyyy"
           )}
         </time>
