@@ -30,7 +30,7 @@ export default function Saving({ saving }) {
                 </Typography>
               </div>
               {
-                false ? (
+                saving.insufficient ? (
                   <div>
                     <button
                       type="button"
@@ -41,13 +41,17 @@ export default function Saving({ saving }) {
                     </button>
                   </div>
                 ) :
+                  (
+                  <div className="flex items-center">
+                  </div>
+                  )
+              }
                   <div className="flex items-center">
                     <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M5.60952 5.03491L0 10.0698H9.53619L10.5314 7.87556H5.7L8.7219 5.03491L6.96667 2.19427H15.1638L7.6 19H10.441L19 0H2.46095L5.60952 5.03491Z" fill="#00B9FF" />
                     </svg>
                     <span style={{ color: '#253655' }}>+{saving.currentPoint}</span>
                   </div>
-              }
             </div>
             <Typography>{saving.content}</Typography>
             <div className="flex justify-between">

@@ -4,8 +4,6 @@ import { calculateUnits } from "lib/data";
 import { useRouter } from "next/router";
 
 const formReducer = (state, event) => {
-  // console.log("state:", state);
-  // console.log("event name & value:", [event.name], event.value);
   return {
     ...state,
     [event.name]: event.value,
@@ -19,18 +17,14 @@ function Input() {
   const userID = router.query.id;
 
   const handleChange = (event) => {
-    // console.log("name:", event.target.name);
-    // console.log("value:", event.target.value);
     setFormData({
       name: event.target.name,
       value: event.target.value,
     });
-    // console.log("formData:", formData);
   };
   const handleSubmit = async (event) => {
     event.preventDefault();
     setSubmitting(true);
-    // console.log("submiting:", formData);
     if (
       Object.keys(formData).length < 6 &&
       !Object.values(formData).includes("Select")
@@ -54,11 +48,11 @@ function Input() {
       savingGoal: formData.target,
       period: formData.frequency,
       currency: formData.currency,
-      deadline: new Date(),
+      deadline: new Date(formData.date),
       userId: userID,
     };
-
-    // console.log("req:", reqBodyObj);
+    
+    console.log("rqeuestbody", reqBodyObj)
 
     const res = await fetch("/api/saving", {
       headers: { "Content-Type": "application/json" },
