@@ -1,4 +1,3 @@
-// Handling user uploading
 import nextConnect from 'next-connect'
 import multiparty from 'multiparty'
 
