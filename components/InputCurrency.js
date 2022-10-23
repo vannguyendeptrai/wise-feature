@@ -8,15 +8,12 @@ export default function CurrencyInput({ onChange }) {
         Target Amount
       </label>
       <div className="relative mt-1 rounded-md shadow-sm">
-        <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-          <span className="text-[#00B9FF] sm:text-sm">$</span>
-        </div>
         <input
           onChange={onChange}
           type="text"
           name="target"
           id="target"
-          className="block w-full rounded-md border-gray-300 pl-7 p-3 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+          className="block w-full rounded-md border-gray-300 p-3 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
           placeholder="0.00"
         />
         <div className="absolute inset-y-0 right-0 flex items-center">

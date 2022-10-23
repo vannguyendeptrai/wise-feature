@@ -17,7 +17,7 @@ export default function Home({ users }) {
         </div>
       </div>
 
-      <div className="flex-col items-center">
+      <div className="flex-col justify-center">
         <Users users={users}></Users>
       </div>
     </>
