@@ -32,7 +32,7 @@ export default function Deposit({ deposit }) {
             "ddd, DD MMM, yyyy"
           )}
         </time>
-        {deposit.stage == "In Progress" ? (
+        {deposit.stage === "In Progress" ? (
           <div
             className="p-1 mb-4 text-sm text-yellow-700 bg-yellow-100 rounded-lg dark:bg-yellow-200 dark:text-yellow-800"
             role="alert"
@@ -40,12 +40,27 @@ export default function Deposit({ deposit }) {
             <span className="font-medium">Stage:</span> {deposit.stage}
           </div>
         ) : (
+          <></>
+        )}
+        {deposit.stage === "Completed" ? (
           <div
-            className="p-1 mb-4 text-sm text-green-700 bg-green-100 rounded-lg dark:bg-green-200 dark:text-green-800"
+            className="p-1 mb-4 text-sm text-green-700 bg-yellow-100 rounded-lg dark:bg-yellow-200 dark:text-yellow-800"
             role="alert"
           >
             <span className="font-medium">Stage:</span> {deposit.stage}
           </div>
+        ) : (
+          <></>
+        )}
+        {deposit.stage === "Overdue" ? (
+          <div
+            className="p-1 mb-4 text-sm text-red-700 bg-yellow-100 rounded-lg dark:bg-yellow-200 dark:text-yellow-800"
+            role="alert"
+          >
+            <span className="font-medium">Stage:</span> {deposit.stage}
+          </div>
+        ) : (
+          <></>
         )}
       </div>
     </>
