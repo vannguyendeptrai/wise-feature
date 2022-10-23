@@ -48,9 +48,11 @@ function Input() {
       savingGoal: formData.target,
       period: formData.frequency,
       currency: formData.currency,
-      deadline: new Date(),
+      deadline: new Date(formData.date),
       userId: userID,
     };
+    
+    console.log("rqeuestbody", reqBodyObj)
 
     const res = await fetch("/api/saving", {
       headers: { "Content-Type": "application/json" },
