@@ -10,12 +10,18 @@ import {
   Button,
 } from "@material-tailwind/react";
 import { availableCurrencies } from "lib/data";
+import { useState } from "react";
 
 export default function Saving({ saving }) {
-  console.log("saving", saving);
-
+  const [displayData, setDisplayData] = useState({
+    "currentDeposit": saving.currentDeposit,
+    "savingGoal": saving.savingGoal,
+    "currency": saving.currency
+  })
+  console.log("currentData", displayData);
   function changeData(input) {
-    console.log("here", input)
+    console.log(input)
+
   }
   
   return (
