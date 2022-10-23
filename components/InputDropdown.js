@@ -20,7 +20,7 @@ export default function InputDropdown({ onChange }) {
           onChange={onChange}
           id="frequency"
           name="frequency"
-          className="block w-full rounded-md  p-3 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+          className="bg-white block w-full rounded-md  p-3 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
         >
           <option disabled hidden>
             Select

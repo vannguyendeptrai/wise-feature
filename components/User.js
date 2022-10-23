@@ -1,4 +1,4 @@
-import Link from 'next/link'
+import Link from "next/link";
 import {
   Card,
   CardHeader,
@@ -24,20 +24,23 @@ export default function User({ user }) {
       </div>
       </div> */}
 
-      <div className='flex flex-col mb-4 p-10 mx-20 my-10'>
-        <Card className="w-96">
-          <CardHeader floated={false} className="h-50">
-            <img src="https://images7.alphacoders.com/123/1237440.jpg" alt="profile-picture" />
+      <div className="mb-4 mx-12 my-10 flex justify-center">
+        <Card className="max-w-[25rem]">
+          <CardHeader floated={false} className="">
+            <img
+              src="https://images7.alphacoders.com/123/1237440.jpg"
+              alt="profile-picture"
+            />
           </CardHeader>
           <CardBody className="text-center">
             <Typography variant="h4" color="blue-gray" className="mb-2">
               <Link href={`/user/${user.id}`}>
-                <a className='ml-1'>Log in as {user.name}</a>
+                <a className="ml-1">Log in as {user.name}</a>
               </Link>
             </Typography>
           </CardBody>
         </Card>
       </div>
     </>
-  )
+  );
 }

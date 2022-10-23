@@ -27,7 +27,7 @@ export default function Saving({ saving, deposits }) {
     <>
       <div className="w-full bg-[#f2f5f7] h-28">
         <div className="flex flex-col items-center relative">
-          <div className="px-5 flex justify-between relative bg-[#37517E] w-full h-60 rounded-b-3xl pt-24">
+          <div className="px-5 lg:px-[35%] flex justify-between lg:px-[35%] relative bg-[#37517E] w-full h-60 rounded-b-3xl pt-24">
             <div className="cursor-pointer" onClick={() => router.back()}>
               <svg
                 width="28"
@@ -37,8 +37,8 @@ export default function Saving({ saving, deposits }) {
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <path
-                  fill-rule="evenodd"
-                  clip-rule="evenodd"
+                  fillRule="evenodd"
+                  clipRule="evenodd"
                   d="M17.79 7.41005C18.3367 7.95678 18.3367 8.84322 17.79 9.38995L13.1799 14L17.79 18.6101C18.3367 19.1568 18.3367 20.0432 17.79 20.5899C17.2433 21.1367 16.3568 21.1367 15.8101 20.5899L10.2101 14.9899C9.66337 14.4432 9.66337 13.5568 10.2101 13.0101L15.8101 7.41005C16.3568 6.86332 17.2433 6.86332 17.79 7.41005Z"
                   fill="#00B9FF"
                 />
@@ -55,7 +55,7 @@ export default function Saving({ saving, deposits }) {
       </div>
 
       <div className="flex flex-col mb-4 mx-20 my-10 items-center">
-        <Card className="min-w-[25rem]">
+        <Card className="w-[25rem]">
           <CardBody>
             <div className="flex justify-between">
               <div>
@@ -100,7 +100,7 @@ export default function Saving({ saving, deposits }) {
       </div>
 
       <div className="flex flex-col mb-4 mx-20 my-10 items-center">
-        <ol class="relative border-l-2 border-gray-300 dark:border-gray-700">
+        <ol className="relative border-l-2 border-gray-300 dark:border-gray-700">
           <Deposits deposits={deposits} />
         </ol>
       </div>
