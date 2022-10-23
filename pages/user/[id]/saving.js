@@ -53,8 +53,6 @@ function Input() {
       userId: userID,
     };
 
-    console.log("rqeuestbody", reqBodyObj);
-
     const res = await fetch("/api/saving", {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(reqBodyObj),

@@ -3,7 +3,6 @@ import Link from "next/link";
 import moment from "moment";
 
 export default function Deposit({ deposit }) {
-  // console.log("dep:", deposit);
   return (
     <>
       <div>

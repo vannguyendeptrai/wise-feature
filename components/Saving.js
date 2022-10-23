@@ -124,15 +124,3 @@ export default function Saving({ saving }) {
     </>
   );
 }
-
-export async function getServerSideProps({ saving }) {
-  // console.log(saving.id);
-  // let deposits = await getDepositsOnSaving(saving.id, prisma)
-  // deposits = JSON.parse(JSON.stringify(deposits))
-  // console.log(deposits)
-  return {
-    props: {
-      // deposits
-    },
-  };
-}

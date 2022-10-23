@@ -15,7 +15,6 @@ import {
 import { useRouter } from "next/router";
 
 export default function Saving({ saving, deposits }) {
-  console.log("here", saving);
 
   const router = useRouter();
 

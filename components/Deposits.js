@@ -2,7 +2,6 @@ import Deposit from "components/Deposit";
 
 export default function Deposits({ deposits }) {
   if (!deposits) return null;
-  console.log("deposits", deposits);
 
   return (
     <>
