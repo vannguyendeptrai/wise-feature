@@ -12,15 +12,26 @@ import {
 import { availableCurrencies } from "lib/data";
 import { useState } from "react";
 
-export default function Saving({ saving }) {
-  const [displayData, setDisplayData] = useState({
-    currentDeposit: saving.currentDeposit,
-    savingGoal: saving.savingGoal,
-    currency: saving.currency,
-  });
-  // console.log("currentData", displayData);
+
+export default function Saving({ saving }) {  
+  const [newCurrency, setNewCurrency] = useState(saving.currency);
+
+  const [convertRate, setConvertRate] = useState(1);
+
+  const origin = availableCurrencies.filter(element => element.name === saving.currency);
+
   function changeData(input) {
-    console.log(input);
+    setNewCurrency(input.name)
+    if(input.name === saving.currency){
+      setConvertRate(1)
+    }else{
+      let selected = availableCurrencies.filter(element => element.name === input.name);
+      if(selected[0].rate > origin[0].rate){
+        setConvertRate(1*selected[0].rate)
+      }else if(selected[0].rate < origin[0].rate){
+        setConvertRate(1/selected[0].rate)
+      }
+    }
   }
 
   return (
@@ -74,7 +85,7 @@ export default function Saving({ saving }) {
             <Typography>{saving.content}</Typography>
             <div className="flex justify-between">
               <span style={{ color: "#37517E" }} variant="small">
-                ${saving.currentDeposit} / ${saving.savingGoal}
+                {saving.currentDeposit * convertRate} {newCurrency} / {saving.savingGoal * convertRate} {newCurrency}
               </span>
               <span style={{ color: "#37517E" }} variant="small">
                 {Math.round((saving.currentDeposit * 100) / saving.savingGoal)}%
