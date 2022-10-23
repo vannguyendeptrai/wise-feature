@@ -51,6 +51,7 @@ export default function Deposit({ deposit }) {
       </div>
     </>
   );
+
 }
 
 {

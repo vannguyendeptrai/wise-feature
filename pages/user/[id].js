@@ -69,9 +69,6 @@ export default function Profile({ user, savings }) {
           </Button>
         </Link>
       </div>
-      {/* <div className="border border-3 border-black p-10  mx-20 my-10">
-        <NewSaving user={user} />
-      </div> */}
     </>
   );
 }

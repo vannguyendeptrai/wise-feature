@@ -10,6 +10,7 @@ export default function Deposits({ deposits }) {
         <li key={index} class="mb-10 ml-6">
           <Deposit key={index} deposit={deposit} />
         </li>
+
       ))}
     </>
   );
