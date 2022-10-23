@@ -24,8 +24,9 @@ export default function Profile({ user, savings }) {
       >
         <p className="text-center">User ID: {user.id}</p>
       </header>
+      
       <div className="flex flex-col mb-4 mx-20 my-10 items-center">
-        <div className="w-1/2">
+        <div className="w-1/2 flex items-center justify-between py-1">
           <span>
           <svg
             width="19"
@@ -40,6 +41,11 @@ export default function Profile({ user, savings }) {
             />
           </svg>{' '}{user.currentPoint}
           </span>
+          <Link href={`${user.id}/depositRoadmap`}>
+            <Button className="w-1/5" variant="outlined">
+              Deposit Roadmap
+            </Button>
+          </Link>
         </div>
       </div>
       <Savings savings={savings} />
@@ -50,9 +56,9 @@ export default function Profile({ user, savings }) {
           </Button>
         </Link>
       </div>
-      <div className="border border-3 border-black p-10  mx-20 my-10">
+      {/* <div className="border border-3 border-black p-10  mx-20 my-10">
         <NewSaving user={user} />
-      </div>
+      </div> */}
     </>
   );
 }
