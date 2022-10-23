@@ -2,18 +2,20 @@ import Link from "next/link";
 import prisma from "lib/prisma";
 import { getUser, calculateSavingsOfUser } from "lib/data.js";
 import { Button } from "@material-tailwind/react";
+import { useRouter } from "next/router";
 
 import Savings from "components/Savings";
 import NewSaving from "components/NewSaving";
 
 export default function Profile({ user, savings }) {
+  const router = useRouter();
   if (!user) return <p className="text-center p-5">User does not exist 😞</p>;
   return (
     <>
       <div className="w-full bg-[#f2f5f7] h-28">
         <div className="flex flex-col items-center relative">
           <div className="px-5 flex justify-between lg:px-[35%]  relative bg-[#37517E] w-full h-60 rounded-b-3xl pt-24">
-            <div className="cursor-pointer">
+            <div onClick={() => router.back()} className="cursor-pointer">
               <svg
                 width="28"
                 height="28"
@@ -50,9 +52,7 @@ export default function Profile({ user, savings }) {
                   />
                 </svg>{" "}
               </span>
-              <Link href={`/user/${user.id}/coupon`}>
-                {user.currentPoint}
-              </Link>
+              <Link href={`/user/${user.id}/coupon`}>{user.currentPoint}</Link>
             </div>
           </div>
         </div>
