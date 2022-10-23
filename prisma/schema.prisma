@@ -95,5 +95,3 @@ model PersonalDeposit {
   stage         String?  //adding Stage
   insufficient       Boolean   @default(false)
 }
-
-// Saving Plan - Team
