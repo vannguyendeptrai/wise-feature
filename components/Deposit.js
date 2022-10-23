@@ -1,6 +1,7 @@
 import { faL } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 import moment from "moment";
+import { depositStages } from "lib/data";
 
 export default function Deposit({ deposit }) {
   return (
@@ -42,24 +43,24 @@ export default function Deposit({ deposit }) {
         ) : (
           <></>
         )}
-        {deposit.stage === "Completed" ? (
+        {depositStages === "Completed" ? (
           <div
-            className="p-1 mb-4 text-sm text-green-700 bg-yellow-100 rounded-lg dark:bg-yellow-200 dark:text-yellow-800"
-            role="alert"
+          className="p-1 mb-4 text-sm text-green-700 bg-green-100 rounded-lg dark:bg-green-200 dark:text-green-800"
+          role="alert"
           >
             <span className="font-medium">Stage:</span> {deposit.stage}
           </div>
-        ) : (
+        ): (
           <></>
         )}
-        {deposit.stage === "Overdue" ? (
+        {depositStages === "Overdue" ? (
           <div
-            className="p-1 mb-4 text-sm text-red-700 bg-yellow-100 rounded-lg dark:bg-yellow-200 dark:text-yellow-800"
-            role="alert"
+          className="p-1 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800"
+          role="alert"
           >
             <span className="font-medium">Stage:</span> {deposit.stage}
           </div>
-        ) : (
+        ): (
           <></>
         )}
       </div>
