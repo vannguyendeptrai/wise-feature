@@ -31,8 +31,6 @@ export default async function handler(req, res) {
             data: data,
         })
 
-        res.json(saving)
-
         let numberOfDeposits = await dateCalculator(saving.createdAt, saving.deadline, saving.period)
         let depositPerValue = saving.savingGoal / numberOfDeposits
         let nextTargetDate = await dateIncrementor(saving.createdAt, saving.period)
@@ -57,6 +55,7 @@ export default async function handler(req, res) {
             count++
         }
 
+        res.json(saving)
         return
     }
 }
