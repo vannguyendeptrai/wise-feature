@@ -25,7 +25,7 @@ export default function User({ user }) {
       </div> */}
 
       <div className="mb-4 mx-12 my-10 flex justify-center">
-        <Card className="max-w-[25rem]">
+        <Card className="w-[25rem]">
           <CardHeader floated={false} className="">
             <img
               src="https://images7.alphacoders.com/123/1237440.jpg"
