@@ -50,7 +50,9 @@ export default function Profile({ user, savings }) {
                   />
                 </svg>{" "}
               </span>
-              {user.currentPoint}
+              <Link href={`/user/${user.id}/coupon`}>
+                {user.currentPoint}
+              </Link>
             </div>
           </div>
         </div>
