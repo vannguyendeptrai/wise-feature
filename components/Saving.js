@@ -26,8 +26,8 @@ export default function Saving({ saving }) {
   
   return (
     <>
-      <div className="flex flex-col mb-4 mx-20 my-10 items-center">
-        <Card className="w-1/2">
+      <div className="flex flex-col mb-4 mx-5 my-10 items-center">
+        <Card className="min-w-[25rem]">
           <CardBody>
             <div className="flex justify-between">
               <div>
@@ -42,6 +42,7 @@ export default function Saving({ saving }) {
                   </Link>
                 </Typography>
               </div>
+
               {
                 saving.insufficient ? (
                   <div>
@@ -72,14 +73,24 @@ export default function Saving({ saving }) {
                 ${saving.currentDeposit} / ${saving.savingGoal}
               </span>
               <span style={{ color: "#37517E" }} variant="small">
-                {Math.round(saving.currentDeposit * 100 / saving.savingGoal)}%
+                {Math.round((saving.currentDeposit * 100) / saving.savingGoal)}%
               </span>
             </div>
-            <Progress color={"#008EC0"} value={saving.currentDeposit * 100 / saving.savingGoal} />
+            <Progress
+              color={"#008EC0"}
+              value={(saving.currentDeposit * 100) / saving.savingGoal}
+            />
           </CardBody>
-          <CardFooter divider className="flex items-center justify-between py-3">
-            <Typography variant="small">Deposit Frequency: {saving.period}</Typography>
-            <Typography variant="small">{moment(new Date(saving.deadline)).format('ddd, DD MMM, yyyy')}</Typography>
+          <CardFooter
+            divider
+            className="flex items-center justify-between py-3"
+          >
+            <Typography variant="small">
+              Deposit Frequency: {saving.period}
+            </Typography>
+            <Typography variant="small">
+              {moment(new Date(saving.deadline)).format("ddd, DD MMM, yyyy")}
+            </Typography>
           </CardFooter>
           <CardFooter divider className="flex items-center justify-between py-3">
            {availableCurrencies.map((element) => (
@@ -93,3 +104,16 @@ export default function Saving({ saving }) {
     </>
   );
 }
+
+export async function getServerSideProps({ saving }) {
+  console.log(saving.id);
+  // let deposits = await getDepositsOnSaving(saving.id, prisma)
+  // deposits = JSON.parse(JSON.stringify(deposits))
+  // console.log(deposits)
+  return {
+    props: {
+      // deposits
+    },
+  };
+}
+

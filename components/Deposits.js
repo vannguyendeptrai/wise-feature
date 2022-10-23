@@ -1,17 +1,17 @@
-import Deposit from 'components/Deposit'
+import Deposit from "components/Deposit";
 
 export default function Deposits({ deposits }) {
-  if (!deposits) return null
+  if (!deposits) return null;
+  console.log("deposits", deposits);
 
   return (
     <>
       {deposits.map((deposit, index) => (
-        <>
-          <li class="mb-10 ml-6">
-            <Deposit key={index} deposit={deposit} />
-          </li>
-        </>
+        <li key={index} class="mb-10 ml-6">
+          <Deposit key={index} deposit={deposit} />
+        </li>
+
       ))}
     </>
-  )
+  );
 }
