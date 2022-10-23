@@ -4,8 +4,10 @@ export default function Dropdown({ choices }){
     return (
         <>
             <select label="Select options">
-            {choices.map((choice) => (
-                <option>choice</option>
+            {choices.map((choice, key) => (
+                <>
+                    <option key={key}>{choice}</option>
+                </>
             ))}
             </select>
         </>
