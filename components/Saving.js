@@ -7,10 +7,16 @@ import {
   CardBody,
   CardFooter,
   Typography,
+  Button,
 } from "@material-tailwind/react";
+import { availableCurrencies } from "lib/data";
 
 export default function Saving({ saving }) {
 
+  function changeData(input) {
+    console.log("here", input)
+  }
+  
   return (
     <>
       <div className="flex flex-col mb-4 mx-20 my-10 items-center">
@@ -68,21 +74,15 @@ export default function Saving({ saving }) {
             <Typography variant="small">Deposit Frequency: {saving.period}</Typography>
             <Typography variant="small">{moment(new Date(saving.deadline)).format('ddd, DD MMM, yyyy')}</Typography>
           </CardFooter>
+          <CardFooter divider className="flex items-center justify-between py-3">
+           {availableCurrencies.map((element) => (
+            <>
+              <Button onClick={() => changeData(element)}>{element.name}</Button>
+            </>
+           ))} 
+          </CardFooter>
         </Card>
       </div>
     </>
   );
-}
-
-export async function getServerSideProps({ saving }) {
-
-  console.log(saving.id)
-  // let deposits = await getDepositsOnSaving(saving.id, prisma)
-  // deposits = JSON.parse(JSON.stringify(deposits))
-  // console.log(deposits)
-  return {
-    props: {
-      // deposits
-    },
-  };
 }

@@ -34,7 +34,7 @@ export default function CurrencyInput({ onChange }) {
               Select
             </option>
             <option>USD</option>
-            <option>CAD</option>
+            <option>HUF</option>
             <option>EUR</option>
           </select>
         </div>
