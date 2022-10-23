@@ -79,6 +79,7 @@ model PersonalSaving {
   currentPoint  Int?
   currentDeposit Int?
   currency      String     @default("USD")
+  insufficient  Boolean    @default(false)
 }
 
 model PersonalDeposit {
