@@ -40,7 +40,7 @@ export default async function handler(req, res) {
 
             await prisma.personalDeposit.create({
                 data: {
-                    value: depositPerValue,
+                    value: parseInt(depositPerValue),
                     owner:{
                         connect: {id: saving.ownerId}
                     },
